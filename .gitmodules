@@ -1,0 +1,6 @@
+[submodule "lib/caterpillar"]
+	path = lib/caterpillar
+	url = https://github.com/gmeuli/caterpillar.git
+[submodule "lib/cxxopts"]
+	path = lib/cxxopts
+	url = https://github.com/jarro2783/cxxopts.git
