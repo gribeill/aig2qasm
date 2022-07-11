@@ -5,6 +5,7 @@ project(aig2qasm VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+
 set(CATERPILLAR_TEST OFF CACHE BOOL "")
 add_subdirectory(lib/caterpillar)
 

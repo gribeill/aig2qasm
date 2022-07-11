@@ -104,6 +104,7 @@ int main(int argc, char* argv[])
 
 		pebbling_mapping_strategy_params ps;
 		ps.pebble_limit = pebble_limit;
+		ps.progress = true;
 	
 	#ifdef USE_Z3	
 		pebbling_mapping_strategy< aig_network, z3_pebble_solver<aig_network> > strategy( ps );
@@ -129,10 +130,13 @@ int main(int argc, char* argv[])
 	std::string input_idx  = vec_to_str(stats.i_indexes);
 	std::string elapsed_time = fmt::format( "//Total time = {:>5.4f} secs", to_seconds(stats.time_total));
 
+	auto [CNOT, Tcount, Tdepth] = caterpillar::detail::qc_stats(circ);
+
 	if (verbose){
 
 		std::cout << "//Network synthesis statistics:\n" << std::endl;
 		std::cout << elapsed_time << std::endl;
+		std::cout << "//CNOT# = " << CNOT << " T# = " << Tcount << " Td = " << Tdepth << std::endl;
 		std::cout << "//Required ancillae: " << stats.required_ancillae << std::endl;
 		std::cout << "//Input indices: \n\t" << input_idx << std::endl;
 		std::cout << "//Output indices: \n\t" << output_idx << std::endl;
@@ -155,6 +159,7 @@ int main(int argc, char* argv[])
 		{
 			ofs << "//Synthesized with aig2qasm from " << file << std::endl;
 			ofs << elapsed_time << std::endl;
+			ofs << "//CNOT# = " << CNOT << " T# = " << Tcount << " Td = " << Tdepth << std::endl;
 			ofs << "//Required ancillae: " << stats.required_ancillae << std::endl;
 			ofs << "//Input indices: " << input_idx << std::endl;
 			ofs << "//Output indices: " << output_idx << std::endl;
